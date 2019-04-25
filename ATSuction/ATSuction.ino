@@ -28,7 +28,7 @@ unsigned long buttonDuration = 0; //Holder variable for computing the lastButton
 unsigned long lastButtonDuration = 0; //The duration that the button was held at in the last press sequence
 
 //User configurable variables
-int restPosition = 1900; //1100 <= restPosition <= 1900
+int restPosition = 1900; //1500 <= restPosition <= 2500
 int suctionPosition = 1100; //The position where the suction hits the mouth
 FlashStorage(restPosition_storage, int);
 FlashStorage(suctionPosition_storage, int);
@@ -49,12 +49,12 @@ void setup() {
   restPosition = restPosition_storage.read();
   suctionPosition = suctionPosition_storage.read();
   //Make sure vars are valid
-  if(!(restPosition > 1500 && restPosition < 1900)){
+  if(!(restPosition >= 1500 && restPosition <= 2500)){
     restPosition = 1800;
     restPosition_storage.write(restPosition);
     }
-   if(!(suctionPosition > 1100 && suctionPosition < 1500)){
-    suctionPosition = 1200;
+   if(!(suctionPosition >= 500 && suctionPosition <= 1500)){
+    suctionPosition = 1400;
     suctionPosition_storage.write(suctionPosition);
     }
     
@@ -134,7 +134,7 @@ void loop() {
       if(setSuctionPoseMode){ //Suction position set mode
         if(switchPressed){
            suctionPosition = currentPosition;
-           //suctionPosition_storage.write(suctionPosition); //Store in nonvolitile memory
+           suctionPosition_storage.write(suctionPosition); //Store in nonvolitile memory
            moveArmature(restPosition, 5);
            setSuctionPoseMode = false;
           }
@@ -145,7 +145,7 @@ void loop() {
       else if(setRestPoseMode){ //Rest position set mode
         if(switchPressed){
            restPosition = currentPosition;
-           //restPosition_storage.write(restPosition); //Store in nonvolitile memory
+           restPosition_storage.write(restPosition); //Store in nonvolitile memory
            moveArmature(restPosition, 5);
            setRestPoseMode = false;
           }
