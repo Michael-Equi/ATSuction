@@ -106,7 +106,11 @@ void loop() {
     if(switchPressed && lastButtonDuration > 250 && lastButtonDuration < 1000 && (!(setSuctionPoseMode || setRestPoseMode))){ //normal suction if not in selected mode or outside click range
       moveArmature(suctionPosition, 3);
       digitalWrite(relayPin, HIGH);
+      delay(200);
+      digitalWrite(relayPin, LOW);
       delay(3000);
+      digitalWrite(relayPin, HIGH);
+      delay(200);
       digitalWrite(relayPin, LOW);
       moveArmature(restPosition, 3);
       switchPressed = false;
