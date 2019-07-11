@@ -108,7 +108,7 @@ void loop() {
       digitalWrite(relayPin, HIGH);
       delay(200);
       digitalWrite(relayPin, LOW);
-      delay(3000);
+      delay(10000);
       digitalWrite(relayPin, HIGH);
       delay(200);
       digitalWrite(relayPin, LOW);
